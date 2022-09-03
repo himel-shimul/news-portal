@@ -5,6 +5,8 @@ const loadCategory = async () => {
 
     displayCategory(data.data.news_category);
 }
+
+
 const displayCategory = categories => {
     const ulContainer = document.getElementById('ul-container');
     // ulContainer.innerHTML = ``;
@@ -108,7 +110,7 @@ const loadNewsDetail = async news_id => {
     displayNewsDetails(data.data[0]);
 
 }
-
+// modal
 const displayNewsDetails = news => {
     console.log(news);
     const newsModalTitle = document.getElementById('newsDetailModalLabel');
