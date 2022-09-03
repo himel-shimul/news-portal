@@ -37,7 +37,7 @@ const displayNews = (allNews) => {
     console.log(allNews);
     const itemsDiv = document.getElementById('items');
     itemsDiv.innerHTML = `
-    <h4 class="p-2 my-3 bg-white border rounded">${allNews.length ? allNews.length : 'No'} items found for category</h4>
+    <h4 class="p-2 my-3 bg-white border rounded">${allNews.length ? allNews.length : 'No'} items found for category.</h4><p>Default Sort By Most Viewed.</p>
     `;
 
     const newsContainer = document.getElementById('news-container');
@@ -50,12 +50,12 @@ const displayNews = (allNews) => {
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
         
-        <div class="card mb-3 w-auto">
-                <div class="row g-0">
+        <div class="card mb-3">
+                <div class="row  g-0">
                     <div class="col-md-4">
                         <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 ">
                         <div class="card-body">
                             <h5 class="card-title">${news.title ? news.title : 'No Data'}</h5>
                             <p class="card-text">${news.details.slice(0, 300)}...</p>
