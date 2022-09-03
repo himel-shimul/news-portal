@@ -2,6 +2,7 @@ const loadCategory = async () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`;
     const res = await fetch(url);
     const data = await res.json();
+
     displayCategory(data.data.news_category);
 }
 const displayCategory = categories => {
@@ -28,7 +29,8 @@ const loadNews = (newsId) => {
     // console.log(url);
     fetch(url)
         .then(res => res.json())
-        .then(data => displayNews(data.data));
+        .then(data => displayNews(data.data))
+        .catch(error => console.log(error))
     toggleSpinner(true);
 }
 const displayNews = (allNews) => {
@@ -51,7 +53,7 @@ const displayNews = (allNews) => {
         <div class="card mb-3 w-auto">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
+                        <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -62,8 +64,8 @@ const displayNews = (allNews) => {
                                     <img style="max-width: 50px; height: 50px; border-radius: 50%;" class=" me-3"
                                         src="${news.author.img}" alt="">
                                     <div>
-                                        <p>${news.author.name ? news.author.name : 'Not Found'}</p>
-                                        <p>${news.author.published_date ? news.author.published_date : 'No Data'}</p>
+                                        <p>${news.author.name ? news.author.name : 'No Data Available'}</p>
+                                        <p>${news.author.published_date ? news.author.published_date : 'No Data Found'}</p>
                                     </div>
                                 </div>
                                 <div><i class="fa fa-light fa-eye"></i> ${news.total_view ? news.total_view : 'no data'}</div>
@@ -93,42 +95,40 @@ const toggleSpinner = isLoading => {
     }
 }
 
-const loadNewsDetail =async news_id=>{
-    const url=`https://openapi.programming-hero.com/api/news/${news_id}`;
-    const res= await fetch(url);
-    const data= await res.json();
-    displayNewsDetails(data);
+const loadNewsDetail = async news_id => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsDetails(data.data[0]);
+
 }
 
-const displayNewsDetails= news =>{
+const displayNewsDetails = news => {
     console.log(news);
+    const newsModalTitle = document.getElementById('newsDetailModalLabel');
+    newsModalTitle.innerText = news.title;
+    const newsBody = document.getElementById('news-body');
+    newsBody.innerHTML = `
+    <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
+    
+    <div class="d-flex justify-content-between py-4">
+                                <div class="d-flex">
+                                    <img style="max-width: 50px; height: 50px; border-radius: 50%;" class=" me-3"
+                                        src="${news.author.img}" alt="">
+                                    <div>
+                                        <p>${news.author.name ? news.author.name : 'Not Found'}</p>
+                                        <p>${news.author.published_date ? news.author.published_date : 'No Data Found'}</p>
+                                    </div>
+                                </div>
+                                <div><i class="fa fa-light fa-eye"></i> ${news.total_view ? news.total_view : 'No Data Found'}</div>
+                                
+                              
+                                
+                            </div>
+                            <p class="card-text">${news.details ? news.details : 'Not Found'}...</p>
+    `;
+
 }
+loadNews(08);
 
 loadCategory();
-
-
-// <!-- Modal -->
-//                                     <div class="modal fade" id="newsDetailModal" tabindex="-1" aria-labelledby="newsDetailModalLabel" aria-hidden="true">
-//                                     <div class="modal-dialog">
-//                                         <div class="modal-content">
-//                                         <div class="modal-header">
-//                                             <h5 class="modal-title" id="newsDetailModalLabel">${news.title}</h5>
-//                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//                                         </div>
-//                                         <div class="modal-body">
-//                                         <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
-//                                         <p class="card-text p-3">${news.details}</p>
-//                                         <div class="d-flex justify-content-between">
-//                                 <div class="d-flex">
-//                                     <img style="max-width: 50px; height: 50px; border-radius: 50%;" class=" me-3"
-//                                         src="${news.author.img}" alt="">
-//                                     <div>
-//                                         <p>${news.author.name ? news.author.name : 'Not Found'}</p>
-//                                         <p>${news.author.published_date ? news.author.published_date : 'No Data'}</p>
-//                                     </div>
-//                                 </div>
-//                                 <div><i class="fa fa-light fa-eye"></i>${news.total_view ? news.total_view : 'no data'}
-                                        
-//                                         </div>
-//                                     </div>
-//                                     </div>
