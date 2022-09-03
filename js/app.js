@@ -5,23 +5,7 @@ const loadCategory = async () => {
 
     displayCategory(data.data.news_category);
 }
-const displayCategory = categories => {
-    const ulContainer = document.getElementById('ul-container');
-    // ulContainer.innerHTML = ``;
-    categories.forEach(category => {
-        const categoryli = document.createElement('li');
-        categoryli.classList.add('nav-item');
-        categoryli.innerHTML = `
-        <li>
-                <a onclick="loadNews(${category.category_id})" class="nav-link active" aria-current="page" href="#">${category.category_name}</a>
-            </li>
-        `;
-        ulContainer.appendChild(categoryli);
-    })
 
-
-
-}
 const loadNews = (newsId) => {
 
     // console.log(newsId);
