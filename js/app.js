@@ -122,7 +122,7 @@ const displayNewsDetails = news => {
                                     <img style="max-width: 50px; height: 50px; border-radius: 50%;" class=" me-3"
                                         src="${news.author.img}" alt="">
                                     <div>
-                                        <p>${news.author.name ? news.author.name : 'Not Found'}</p>
+                                        <p>${news.author.name ? news.author.name : 'No Data Available'}</p>
                                         <p>${news.author.published_date ? news.author.published_date : 'No Data Found'}</p>
                                     </div>
                                 </div>
