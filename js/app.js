@@ -39,7 +39,13 @@ const displayNews = (allNews) => {
     itemsDiv.innerHTML = `
     <h4 class="p-2 my-3 bg-white border rounded">${allNews.length ? allNews.length : 'No'} items found for category.</h4><p>Default Sort By Most Viewed.</p>
     `;
-
+    const noNews = document.getElementById('no-news');
+    if (allNews.length === 0) {
+        noNews.classList.remove('d-none');
+    }
+    else {
+        noNews.classList.add('d-none');
+    }
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ``;
     const sortByTrending = allNews.sort((a, b) => b.total_view - a.total_view);
